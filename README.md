@@ -1,0 +1,2 @@
+# pokemonshowdowns.github.io
+hack
