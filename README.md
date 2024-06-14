@@ -1,2 +1,2 @@
 # pokemonshowdowns.github.io
-hack
+website
