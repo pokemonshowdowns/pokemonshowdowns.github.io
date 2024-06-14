@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Even?</title>
+  </head>
+  <body>
+    <div>function isEven(n){</div>
+    <div>&nbsp&nbsp&nbsp&nbspif(n == 0){</div>
+    <div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp return true</div>
+    <div>&nbsp&nbsp&nbsp&nbsp}</div>
+  </body>
+  <script>
+    let x = prompt("Enter the amount of if statements to go up to:(must be an number)")
+    
+    for(i=1;i<parseInt(x);i++){
+        let even
+        if(i%2===1){
+            even = "false"
+        }else{
+            even = "true"
+        }
+      document.write("&nbsp&nbspelse if&nbsp (n == "+i+"){<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    return "+even+"<br>&nbsp&nbsp&nbsp&nbsp}")
+    }
+    document.write("<br>}")
+  </script>
+</html>
