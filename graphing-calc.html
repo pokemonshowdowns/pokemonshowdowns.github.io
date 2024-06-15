@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<body><center>
+<div><input id="input" style =";">
+<label for = "input">use ^ for exponent also must be y=</label>
+<button onclick="calc()">enter</button><button onclick=location.reload()>clear graph</button></div>
+<canvas id="myCanvas" width="1000" height="1000" style="border:1px solid #000000;margin right:80%">
+disgusting internet explorer user
+</canvas>
+</center>
+<script>
+// Create a canvas
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
+ctx.font = "15px Arial";
+
+ctx.lineWidth = 3
+
+ctx.beginPath();
+
+ctx.moveTo(0,500);
+
+ctx.lineTo(1000,500);
+ctx.moveTo(500,0);
+
+ctx.lineTo(500,1000);
+ctx.stroke();
+
+for(i = 1; i<20;i++){
+    ctx.lineWidth = 1
+    ctx.beginPath();
+    ctx.moveTo(0,i*50);
+
+    ctx.lineTo(1000,i*50);
+    ctx.moveTo(i*50,0);
+
+    ctx.lineTo(i*50,1000);
+    ctx.stroke();
+}
+for(i = 1;i<11;i++){
+    ctx.fillText(-i,510,495+i*50);
+    ctx.fillText(-i,505-i*50,495)
+    ctx.fillText(i,505+i*50,495)
+    ctx.fillText(i,510,495-i*50);
+
+}
+function calc(){
+    var equation = document.getElementById("input").value
+    var coefficients = []
+    equation = equation.replace(/ /g, '');
+    equation = equation.toLowerCase();
+    for(i= 0;i<equation.length;i++){
+
+        if(equation.charAt(i) =="x" && Number.isInteger(parseInt(equation.charAt(i-1)))){
+            let newStringArray = equation.split("");
+            newStringArray[i] = "*";
+            equation = newStringArray.join("");
+        }
+        if(equation.charAt(i) =="x" && Number.isInteger(parseInt(equation.charAt(i-1)))){
+            let newStringArray = equation.split("");
+            newStringArray[i] = "*";
+            equation = newStringArray.join("");
+        }
+    }
+    for(i=0;i<11;i+=0.02){
+        yValue = equation.replaceAll("*","*"+i)
+        yValue = yValue.replaceAll("-x","-1*x")
+        yValue = yValue.replaceAll("x","("+i+")")
+        yValue = yValue.replaceAll("^","**")
+
+        ctx.beginPath();
+        ctx.strokeStyle = "red";
+        console.log(yValue)
+        ctx.arc(500+i*50, 500-eval(yValue)*50, 2, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.fillStyle="red"
+        ctx.fill()
+    }
+    for(i=0;i<11;i+=0.02){
+        yValue = equation.replaceAll("*","*"+"("+(-i)+")")
+        yValue = yValue.replaceAll("-x","-1*x")
+
+        yValue = yValue.replaceAll("x","(-"+i+")")
+        console.log(yValue)
+        yValue = yValue.replaceAll("^","**")
+        console.log(yValue)
+        console.log(eval(yValue))
+        ctx.beginPath();
+        ctx.arc(500-i*50, 500-(eval(yValue)*50), 2, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.fillStyle="red"
+        ctx.fill()
+    }
+   
+}
+</script>
+
+
+</body>
+</html>
