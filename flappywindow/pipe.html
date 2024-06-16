@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <body  style="background-color:green"onkeydown = "jump()">
+        <div style="width:10%;position:absolute;top:0;left:0;background-color:white;height:80%">
+        </div>
+        <div style="width:10%;position:absolute;top:0;right:0;background-color:white;height:80%">
+        </div>
+    </body>
+    <script>
+
+        window.blur()
+        var pipe2
+        var pipe4 = true
+        var opened = false
+        function jump(){
+            window.opener.jump() 
+            if(!opened&& window.opener.spawnNewPipe !="test"){
+                pipe2 = window.open("/pipe2.html", "_blank", 'menubar=no, status=no, toolbar=no, resizable=no, width=50, height=300, titlebar=no, alwaysRaised=yes')
+                opened = true
+            }
+            if(!opened&& window.opener.spawnNewPipe == "test"&&pipe4==true){
+                window.opener.spawnNewPipe = "asdf"
+                pipe4 = window.open("/pipe2.html", "_blank", 'menubar=no, status=no, toolbar=no, resizable=no, width=50, height=300, titlebar=no, alwaysRaised=yes')
+
+            }
+            
+        }
+
+    </script>
+</html>
