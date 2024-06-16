@@ -20,7 +20,7 @@
         function start(){
             gravity = 1
             birdY=500
-            birdWindow = window.open("/bird.html", "_blank", 'menubar=no, status=no, toolbar=no, resizable=no, width=50, height=50, titlebar=no, alwaysRaised=yes')
+            birdWindow = window.open("/flappywindow/bird.html", "_blank", 'menubar=no, status=no, toolbar=no, resizable=no, width=50, height=50, titlebar=no, alwaysRaised=yes')
             setInterval(doPhysics,45)
             setTimeout(function(){checkPipeDeath = true;},3000)
             
