@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+    <head>
+    </head>
+    <body>
+        <button onclick = "start()">start</button>
+        press space when the window spawns
+    </body>
+    <script>
+        if(detectMob()){
+            document.getElementByTagName("body").innerHTML = "you cant use this on mobile"
+        }
+        var ready = false
+        var birdWindow
+        var birdY = 500
+        var gravity = 1
+        var checkPipeDeath = false
+        var checkPipe2Death = false
+        var generateNewHeight = true
+        function start(){
+            gravity = 1
+            birdY=500
+            birdWindow = window.open("/bird.html", "_blank", 'menubar=no, status=no, toolbar=no, resizable=no, width=50, height=50, titlebar=no, alwaysRaised=yes')
+            setInterval(doPhysics,45)
+            setTimeout(function(){checkPipeDeath = true;},3000)
+            
+        }
+        function doPhysics(){
+            if(ready){
+                if(birdWindow.innerHeight+ birdY >= screen.height ||birdY<0){
+                    ready=false
+                                                            birdWindow.pipe1.pipe2.pipe3.pipe4.close()
+
+                     birdWindow.pipe1.pipe2.pipe3.close()
+                    birdWindow.pipe1.close()
+                    birdWindow.pipe1.pipe2.close()
+                    birdWindow.close()
+                    location.reload()
+                } 
+                
+                if(birdWindow.screenLeft+birdWindow.innerWidth>=birdWindow.pipe1.screenLeft&&birdWindow.pipe1.innerHeight>=birdWindow.screenY-30&&checkPipeDeath&& birdWindow.pipe1.screenX+birdWindow.pipe1.innerWidth>birdWindow.screenX){
+                    birdWindow.pipe1.pipe2.pipe3.close()
+                    ready=false
+                                        birdWindow.pipe1.pipe2.pipe3.pipe4.close()
+
+                    birdWindow.pipe1.pipe2.close()
+                    birdWindow.pipe1.close()
+                    birdWindow.close()
+                    location.reload()
+                }
+             if(checkPipe2Death&&birdWindow.screenLeft+birdWindow.innerWidth>=birdWindow.pipe1.screenLeft&&birdWindow.screenY+birdWindow.innerHeight>=birdWindow.pipe1.pipe2.screenY&& birdWindow.pipe1.screenX+birdWindow.pipe1.innerWidth>birdWindow.screenX){
+                  birdWindow.pipe1.pipe2.pipe3.close()
+                 birdWindow.pipe1.pipe2.close()
+                                     ready=false
+                                        birdWindow.pipe1.pipe2.pipe3.pipe4.close()
+
+                birdWindow.pipe1.close()
+                    birdWindow.close()
+                    location.reload()
+              }
+                
+                
+                birdY += gravity
+                birdWindow.moveTo(500,birdY)
+                gravity += 1.8
+                birdWindow.pipepos -= 12
+                birdWindow.pipe1.moveTo(birdWindow.pipepos, 0)
+                
+                birdWindow.pipe1.pipe2.moveTo(birdWindow.pipepos, screen.height- birdWindow.pipe1.pipe2.innerHeight-80)
+               
+               
+             if(birdWindow.pipepos>=screen.width/2){
+                    birdWindow.pipe1.pipe2.pipe3.moveTo(birdWindow.pipepos - screen.width/2, 0)
+                    birdWindow.pipe1.pipe2.pipe3.pipe4.moveTo(birdWindow.pipepos - screen.width/2, screen.height- birdWindow.pipe1.pipe2.pipe3.pipe4.innerHeight-80)
+
+                    if(birdWindow.pipe1.pipe2.pipe3.screenX<=12){
+                        generateNewHeight = true
+                    }
+                } else if(generateNewHeight){
+                     birdWindow.pipe1.pipe2.pipe3.resizeTo(50,generatePipeHeight())
+                     birdWindow.pipe1.pipe2.pipe3.pipe4.resizeTo(50,550-birdWindow.pipe1.pipe2.pipe3.innerHeight)
+                     generateNewHeight = false
+                    
+                    birdWindow.pipe1.pipe2.pipe3.moveTo(screen.width-(screen.width/2-birdWindow.pipepos)-150, 0)
+                    birdWindow.pipe1.pipe2.pipe3.pipe4.moveTo(screen.width-(screen.width/2-birdWindow.pipepos)-150, screen.height- birdWindow.pipe1.pipe2.pipe3.pipe4.innerHeight-80)
+
+                    
+                }else{
+                    birdWindow.pipe1.pipe2.pipe3.moveTo(screen.width-(screen.width/2-birdWindow.pipepos)-150, 0)
+                    birdWindow.pipe1.pipe2.pipe3.pipe4.moveTo(screen.width-(screen.width/2-birdWindow.pipepos)-150, screen.height- birdWindow.pipe1.pipe2.pipe3.pipe4.innerHeight-80)
+
+                }
+                
+                
+                
+                if(birdWindow.pipe1.screenLeft<=0){
+                    birdWindow.pipepos=screen.width-150
+                    birdWindow.pipe1.resizeTo(50,generatePipeHeight()) 
+                    birdWindow.pipe1.pipe2.resizeTo(50,500-birdWindow.pipe1.innerHeight)
+                }
+                if(birdWindow.screenLeft+birdWindow.innerWidth>=birdWindow.pipe1.pipe2.pipe3.screenLeft&&birdWindow.pipe1.pipe2.pipe3.innerHeight>=birdWindow.screenY-30&&checkPipeDeath&& birdWindow.pipe1.pipe2.pipe3.screenX+birdWindow.pipe1.pipe2.pipe3.innerWidth>birdWindow.screenX){
+                    ready = false
+                    birdWindow.pipe1.pipe2.pipe3.close()
+                                        birdWindow.pipe1.pipe2.pipe3.pipe4.close()
+
+                    birdWindow.pipe1.pipe2.close()
+                    birdWindow.pipe1.close()
+                    birdWindow.close()
+                    location.reload()
+                }
+                if(birdWindow.screenLeft+birdWindow.innerWidth>=birdWindow.pipe1.pipe2.pipe3.screenLeft&&birdWindow.pipe1.pipe2.pipe3.pipe4.screenY<=birdWindow.screenY+birdWindow.innerHeight&&checkPipeDeath&& birdWindow.pipe1.pipe2.pipe3.screenX+birdWindow.pipe1.pipe2.pipe3.innerWidth>birdWindow.screenX){
+                    ready = false
+                                        birdWindow.pipe1.pipe2.pipe3.pipe4.close()
+
+                    birdWindow.pipe1.pipe2.pipe3.close()
+
+                    birdWindow.pipe1.pipe2.close()
+                    birdWindow.pipe1.close()
+                    birdWindow.close()
+                    location.reload()
+                }
+            }
+        }
+        function generatePipeHeight(){
+            return 50 + Math.floor(Math.random()*screen.height/3)
+        }
+  function detectMob() {
+    const toMatch = [
+        /Android/i,
+        /webOS/i,
+        /iPhone/i,
+        /iPad/i,
+        /iPod/i,
+        /BlackBerry/i,
+        /Windows Phone/i
+    ];
+    
+    return toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem);
+    });
+}
+    </script>
+</html>
