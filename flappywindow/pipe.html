@@ -15,12 +15,12 @@
         function jump(){
             window.opener.jump() 
             if(!opened&& window.opener.spawnNewPipe !="test"){
-                pipe2 = window.open("/pipe2.html", "_blank", 'menubar=no, status=no, toolbar=no, resizable=no, width=50, height=300, titlebar=no, alwaysRaised=yes')
+                pipe2 = window.open("/flappywindow/pipe2.html", "_blank", 'menubar=no, status=no, toolbar=no, resizable=no, width=50, height=300, titlebar=no, alwaysRaised=yes')
                 opened = true
             }
             if(!opened&& window.opener.spawnNewPipe == "test"&&pipe4==true){
                 window.opener.spawnNewPipe = "asdf"
-                pipe4 = window.open("/pipe2.html", "_blank", 'menubar=no, status=no, toolbar=no, resizable=no, width=50, height=300, titlebar=no, alwaysRaised=yes')
+                pipe4 = window.open("/flappywindow/pipe2.html", "_blank", 'menubar=no, status=no, toolbar=no, resizable=no, width=50, height=300, titlebar=no, alwaysRaised=yes')
 
             }
             
