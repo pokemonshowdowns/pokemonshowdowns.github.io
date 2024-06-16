@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+    <body onkeydown = "jump()">
+        <img style="width:100%;height:100%"src="/bird.png">
+    </body>
+    <script>
+        var spawnNewPipe="nottest"
+        var pipeCount = 0
+        var pipe1
+        var pipepos = screen.width - 100
+        var pipeHeight;
+        var attemptOpenBottom = false;
+        var pipe2;
+        var pipe3;
+        function jump(){
+            window.opener.gravity = -14
+            window.focus()
+            if(pipeCount<1){
+                pipe1 = window.open("/pipe.html", "_blank", 'menubar=no, status=no, toolbar=no, resizable=no, width=50, height=150, titlebar=no, alwaysRaised=yes')
+                pipe1.resizeTo(50, pipeHeight)
+                window.focus()
+                setTimeout(window.focus, 100);
+                pipeCount++
+                attemptOpenBottom = true
+            }
+
+            
+        }
+        window.onload = function(){
+            window.opener.ready=true
+            pipeHeight = window.opener.generatePipeHeight()
+        }
+
+    </script>
+</html>
